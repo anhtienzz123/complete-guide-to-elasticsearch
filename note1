@@ -1,0 +1,77 @@
+GET /_cluster/health
+
+GET /_cat/nodes?v
+
+GET /_cat/indices?expand_wildcards=all&v
+
+PUT user
+{
+  "settings": {
+    "number_of_shards": 5,
+    "number_of_replicas": 2
+  },
+  "mappings": {
+    "properties": {
+      "name": {
+        "type": "keyword"
+      },
+      "age": {
+        "type": "integer"
+      },
+      "des": {
+        "type": "text"
+      }
+    }
+  }
+}
+
+DELETE user
+
+GET user/_doc/3
+
+PUT user/_doc/2
+{
+  "name": "Tuan Huynh",
+  "age": "30",
+  "des": "Tui la Tuan Huynh"
+}
+
+DELETE user/_doc/0
+
+GET user/_search
+{
+  "size": 2,
+  "timeout": "30s",
+  "query": {
+    "match_all": {
+    }
+  }
+}
+
+GET user/_count
+
+PUT blog
+{
+ 
+  "mappings": {
+    "properties": {
+      "title": {
+        "type": "text"
+      }
+    }
+  }
+}
+GET blog/_search
+{
+  "size": 2,
+  "timeout": "30s",
+  "query": {
+    "match_all": {
+    }
+  }
+}
+
+PUT blog/_doc/1
+{
+  "title": "bai blog 1"
+}
